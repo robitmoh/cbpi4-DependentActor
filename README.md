@@ -53,9 +53,17 @@ This plugin is not a substitute for properly rated hardware components and safet
 - Dependency Type - With 'Restriction', the 'Actor Dependency' is required to be OFF in order to switch the 'Base Actor' ON. With 'Prerequisite', the 'Actor Dependency' is required to be ON in order to switch the 'Base Actor' ON.
 - Notification - 'Yes' will show Notifications in case actor can't be switched based on dependency
 
+### Conditional Inverted Actor
+- Targetactor - Actor that should be triggered (e.g. Bypass valve)
+- Action - 'off' or 'on'. Targetactor will be switched to setting if group is on
+- Logic - The group logic always 'AND'
+- All actors in defined group have to be on to trigger targetactor. The actor state can invert 
+- Actor 1-4 - Up to 4 actors can be defined in the group
+  Example
+    Targetactor (Bypass valve) "on" when pump1 "on" and heater valve is "off"
 
 
 ### Changelog
-
+- 21.03.23: (0.0.5) Add Conditional Inverted Actor
 - 11.03.23: (0.0.4) Fixed Bugs in dependent actor and added conditional actor
 - (0.0.1) Initial commit, Testing of port
