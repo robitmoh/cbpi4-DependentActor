@@ -203,7 +203,7 @@ class ConditionalInvertedActor(CBPiActor):
     async def on_start(self):
         self.state = False
         self.actors = []
-        self.logic = []
+        self.logics = []
         self.power = 0
         self.actoractivity = True if self.props.get("Action", "on") == "on" else False
         self.switch=self.props.get("Actor")
@@ -217,13 +217,13 @@ class ConditionalInvertedActor(CBPiActor):
             if self.props.get("Actor04", None) is not None:
                 self.actors.append(self.props.get("Actor04"))
             if self.props.get("Logic01", None) is not None:
-                self.logic.append(self.props.get("Logic01"))
+                self.logics.append(self.props.get("Logic01"))
             if self.props.get("Logic02", None) is not None:
-                self.logic.append(self.props.get("Logic02"))
+                self.logics.append(self.props.get("Logic02"))
             if self.props.get("Logic03", None) is not None:
-                self.logic.append(self.props.get("Logic03"))
+                self.logics.append(self.props.get("Logic03"))
             if self.props.get("Logic04", None) is not None:
-                self.logic.append(self.props.get("Logic04"))
+                self.logics.append(self.props.get("Logic04"))
         except Exception as e:
             logging.error(e)
         self.numberactors=len(self.actors)
@@ -243,25 +243,25 @@ class ConditionalInvertedActor(CBPiActor):
     async def run(self):
         while self.running == True:
             statesum = 0
-
             targetactor = self.cbpi.actor.find_by_id(self.switch)
             try:
                 targetstatus=targetactor.instance.state
             except:
                 targetstatus=False            
 
-            for actor in self.actors:
+            for i in range(0, self.numberactors):
+                actor=self.actors[i]
                 currentactor=self.cbpi.actor.find_by_id(actor)
                 try:
-                    if self.cbpi.logic.find_by_id(actor)=="Invert"
+                    if self.logics[i]=="Invert":
                         status=not currentactor.instance.state
+
                     else:
                         status=currentactor.instance.state
                 except:
                     status=False
                 if status:
                     statesum +=1
-
             
             if statesum == self.numberactors:
                 if self.actoractivity:
