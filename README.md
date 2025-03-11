@@ -59,12 +59,13 @@ This plugin is not a substitute for properly rated hardware components and safet
 - Logic - The group logic always 'AND'
 - All actors in defined group have to be on to trigger targetactor. The actor state can invert 
 - Actor 1-4 - Up to 4 actors can be defined in the group
+
   Example
     Targetactor (Bypass valve) "on" when pump1 "on" and heater valve is "off"
 
 
-### Changelog
-
+### Changelog 
+- 11.03.25: (0.0.6) Add Inverted Conditional Inverted Actor
 - 02.04.23: (0.0.5) Fixed bug in conditional actor as the target actor was switched on with 0 power
 - 11.03.23: (0.0.4) Fixed Bugs in dependent actor and added conditional actor
 - (0.0.1) Initial commit, Testing of port
